@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './App.scss';
 import { peopleFromServer } from './data/people';
 import { Dropdown } from './components/Dropdown/Dropdown';
@@ -13,14 +13,6 @@ export const App = () => {
   const [people, setPeople] = useState(peopleFromServer);
   const [select, setSelect] = useState<Person | null>(null);
   const timerId = useRef(0);
-
-  useEffect(() => {
-    if (people.length === 1) {
-      setSelect(people[0]);
-    } else {
-      setSelect(null);
-    }
-  }, [people]);
 
   const filteredPeople = (value: string) =>
     setPeople(() => {
@@ -48,6 +40,7 @@ export const App = () => {
     event: React.ChangeEvent<HTMLInputElement>,
     delay?: number,
   ) => {
+    setSelect(null);
     setQuery(event.target.value);
     saveQuery(delay);
   };

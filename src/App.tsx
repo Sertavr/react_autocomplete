@@ -20,17 +20,21 @@ export const App = () => {
       return;
     }
 
+    const normalizeQuery = value.toLowerCase().trim();
+
+    if (normalizeQuery === '') {
+      return;
+    }
+
     controlQuery.current = value;
     setPeople(() => {
-      const normalizeQuery = value.toLowerCase().trim();
-
       return peopleFromServer.filter(person =>
         person.name.toLowerCase().includes(normalizeQuery),
       );
     });
   };
 
-  const handleSelectPerson = (person: Person) => {
+  const handleOnSelectPerson = (person: Person) => {
     setSelect(person);
     setQuery(person.name);
   };
@@ -43,7 +47,7 @@ export const App = () => {
     }, delay);
   };
 
-  const handleChange = (
+  const handleOnChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     delay?: number,
   ) => {
@@ -58,9 +62,9 @@ export const App = () => {
         <Title user={select} />
         <Dropdown
           users={people}
-          handleChange={handleChange}
+          handleOnChange={handleOnChange}
           query={query}
-          handleSelectPerson={handleSelectPerson}
+          onSelectPerson={handleOnSelectPerson}
           delay={DELAY}
         />
 

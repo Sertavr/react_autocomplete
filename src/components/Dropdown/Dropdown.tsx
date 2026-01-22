@@ -6,23 +6,23 @@ type Props = {
   users: Person[];
   query: string;
   delay?: number;
-  handleChange: (
+  handleOnChange: (
     event: React.ChangeEvent<HTMLInputElement>,
     delay?: number,
   ) => void;
-  handleSelectPerson: (person: Person) => void;
+  onSelectPerson: (person: Person) => void;
 };
 
 export const Dropdown: React.FC<Props> = ({
   users,
-  handleChange,
+  handleOnChange,
   query,
   delay,
-  handleSelectPerson,
+  onSelectPerson,
 }) => {
   const [focus, setFocus] = useState(false);
 
-  const handleFocusChange = (isFocused: boolean) => {
+  const handleOnFocusChange = (isFocused: boolean) => {
     setFocus(isFocused);
   };
 
@@ -31,9 +31,9 @@ export const Dropdown: React.FC<Props> = ({
       <div className="dropdown is-active">
         <div className="dropdown-trigger">
           <Input
-            onChange={handleChange}
+            onChange={handleOnChange}
             query={query}
-            onFocusChange={handleFocusChange}
+            onFocusChange={handleOnFocusChange}
             delay={delay}
           />
         </div>
@@ -47,7 +47,7 @@ export const Dropdown: React.FC<Props> = ({
                   data-cy="suggestion-item"
                 >
                   <p
-                    onMouseDown={() => handleSelectPerson({ ...user })}
+                    onMouseDown={() => onSelectPerson({ ...user })}
                     className="has-text-link"
                   >
                     {user.name}

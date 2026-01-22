@@ -23,6 +23,8 @@ export const App = () => {
     const normalizeQuery = value.toLowerCase().trim();
 
     if (normalizeQuery === '') {
+      setPeople(peopleFromServer);
+
       return;
     }
 
@@ -39,11 +41,11 @@ export const App = () => {
     setQuery(person.name);
   };
 
-  const saveQuery = (delay = 300) => {
+  const saveQuery = (newValue: string, delay = 300) => {
     clearTimeout(timerId.current);
 
     timerId.current = window.setTimeout(() => {
-      filteredPeople(query);
+      filteredPeople(newValue);
     }, delay);
   };
 
@@ -51,9 +53,11 @@ export const App = () => {
     event: React.ChangeEvent<HTMLInputElement>,
     delay?: number,
   ) => {
+    const newValue = event.target.value;
+
     setSelect(null);
-    setQuery(event.target.value);
-    saveQuery(delay);
+    setQuery(newValue);
+    saveQuery(newValue, delay);
   };
 
   return (

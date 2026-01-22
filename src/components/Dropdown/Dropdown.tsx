@@ -31,9 +31,9 @@ export const Dropdown: React.FC<Props> = ({
       <div className="dropdown is-active">
         <div className="dropdown-trigger">
           <Input
-            handleChange={handleChange}
+            onChange={handleChange}
             query={query}
-            focusChange={handleFocusChange}
+            onFocusChange={handleFocusChange}
             delay={delay}
           />
         </div>

@@ -13,15 +13,22 @@ export const App = () => {
   const [people, setPeople] = useState(peopleFromServer);
   const [select, setSelect] = useState<Person | null>(null);
   const timerId = useRef(0);
+  const controlQuery = useRef(query);
 
-  const filteredPeople = (value: string) =>
+  const filteredPeople = (value: string) => {
+    if (controlQuery.current === value) {
+      return;
+    }
+
+    controlQuery.current = value;
     setPeople(() => {
-      const normalizeQuery = value.toLowerCase();
+      const normalizeQuery = value.toLowerCase().trim();
 
       return peopleFromServer.filter(person =>
         person.name.toLowerCase().includes(normalizeQuery),
       );
     });
+  };
 
   const handleSelectPerson = (person: Person) => {
     setSelect(person);

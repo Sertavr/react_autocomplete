@@ -3,18 +3,18 @@ import React from 'react';
 type Props = {
   query: string;
   delay?: number;
-  handleChange: (
+  onChange: (
     event: React.ChangeEvent<HTMLInputElement>,
     delay?: number,
   ) => void;
-  focusChange: (isFocus: boolean) => void;
+  onFocusChange: (isFocus: boolean) => void;
 };
 
 export const Input: React.FC<Props> = ({
-  handleChange,
+  onChange,
   query,
   delay,
-  focusChange,
+  onFocusChange,
 }) => {
   return (
     <input
@@ -23,9 +23,9 @@ export const Input: React.FC<Props> = ({
       placeholder="Enter a part of the name"
       className="input"
       data-cy="search-input"
-      onChange={event => handleChange(event, delay)}
-      onFocus={() => focusChange(true)}
-      onBlur={() => focusChange(false)}
+      onChange={event => onChange(event, delay)}
+      onFocus={() => onFocusChange(true)}
+      onBlur={() => onFocusChange(false)}
     />
   );
 };
